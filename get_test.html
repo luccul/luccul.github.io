@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+<body>
+    <button onclick="grab();">Hello</button>
+    <script src="jquery.js"></script>
+    <script>
+    function grab(){
+        var requestingURL = "https://api.civicengine.com/websites/unverified?limit=10&source=olddata-20170124"  
+        var myKey = "Zvi6IsoNMakm1sOsttFp4thjrCjlfsT1U62Kl8sj";
+        $.ajax({
+             url: requestingURL,
+             headers: {'x-api-key': myKey },
+             success: function() { alert('Success!' + authHeader); }
+          });
+    }
+    </script>
+</body>
+</html>
+
