@@ -9,11 +9,12 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script>
     function grab(){
-        var requestingURL = "https://api.civicengine.com/websites/unverified?limit=10&source=olddata-20170124"  
+        var requestingURL = "https://api.civicengine.com/websites/unverified"  
         var myKey = "Zvi6IsoNMakm1sOsttFp4thjrCjlfsT1U62Kl8sj";
         $.ajax({
              url: requestingURL,
              headers: {'x-api-key': myKey },
+             data: {limit:10,source:'olddata-20170124'}
              success: function() { alert('Success!' + authHeader); }
           });
     }
