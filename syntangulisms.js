@@ -1,0 +1,1 @@
+var syntangulisms = ['hello','world'];
