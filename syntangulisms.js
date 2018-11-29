@@ -1,1 +1,1 @@
-var syntangulisms = ['hello','world'];
+var syntangulisms = ['oboid','bimod','exage','niwaze','pinapse','mexander','evinate','diggle','tash','prale','grash','jendo','groust','hobtod','kerm','envine','delote','bacere','groginate','orgot','laret','pimant'];
