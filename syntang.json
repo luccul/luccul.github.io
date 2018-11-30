@@ -1,0 +1,12 @@
+{
+  "$jason": {
+    "head": {
+      "title": "Syntangulisms",
+    },
+    "body": {
+      "background": {
+        "type": "html",
+        "url": "https://luccul.github.io/syntangulisms.html"
+      }
+  }
+}
