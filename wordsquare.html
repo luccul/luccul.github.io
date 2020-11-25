@@ -1,183 +1,18 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
     <head>
         <title>Word Square</title>
+    <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">     
     </head>
-    <body style="font-size:32px;"> 
+    <body> 
         <center>
-            <div style="display:table; border-spacing:10px; margin-top:10%;">
-                <div style="display:table-row">
-                    <div id="00" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="01" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="02" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="03" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>  
-                </div>
-                <div style="display:table-row">
-                    <div id="10" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="11" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="12" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="13" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>  
-                </div>
-                <div style="display:table-row">
-                    <div id="20" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="21" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="22" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="23" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div> 
-                </div>
-                <div style="display:table-row">
-                    <div id="30" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="31" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="32" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>
-                    <div id="33" onclick="activate(this); display(); if(check()){celebrate();}" style="display:table-cell; height:64px; width:64px; border: 2px solid black; text-align:center; line-height:64px; border-radius:8px; cursor:pointer; user-select: none;"></div>   
-                </div>
+            <div id="board">
             </div>
-        <div onclick="hint(); display(); if(check()){celebrate();}" style="height:28px; width:300px; border:2px solid black; margin-top:24px; line-height:28px; font-size:24px;  cursor:pointer;  user-select: none;">HINT</div>
         </center>
     </body>
-    <script>
-        var solutions = [[['i', 'n', 'k', 's'], ['t', 'u', 'n', 'a'], ['e', 'k', 'e', 's'], ['m', 'e', 'w', 's']], [['k', 'e', 'g', 's'], ['i', 'd', 'e', 'a'], ['l', 'e', 'n', 's'], ['o', 'n', 'e', 's']], [['s', 'h', 'o', 'd'], ['l', 'i', 'm', 'a'], ['a', 'v', 'e', 'r'], ['g', 'e', 'n', 'e']], [['m', 'a', 'd', 'e'], ['a', 'c', 'e', 'd'], ['c', 'r', 'a', 'g'], ['h', 'e', 'r', 'e']], [['z', 'i', 'n', 'c'], ['i', 'd', 'e', 'a'], ['g', 'l', 'a', 'd'], ['s', 'e', 't', 's']], [['w', 'h', 'i', 't'], ['e', 'a', 's', 'e'], ['b', 'i', 'l', 'e'], ['s', 'l', 'e', 'd']], [['c', 'l', 'o', 'y'], ['l', 'o', 'v', 'e'], ['o', 'p', 'a', 'l'], ['t', 'e', 'l', 'l']], [['l', 'i', 'm', 'n'], ['i', 'd', 'e', 'a'], ['s', 'l', 'a', 'g'], ['p', 'e', 'n', 's']], [['c', 'o', 'u', 'p'], ['a', 'b', 'l', 'e'], ['m', 'o', 'v', 'e'], ['p', 'e', 'a', 's']], [['h', 'u', 't', 's'], ['a', 'r', 'i', 'a'], ['t', 'e', 'l', 'l'], ['h', 'a', 'l', 't']], [['p', 'u', 'l', 'l'], ['a', 'r', 'i', 'a'], ['t', 'e', 'a', 'r'], ['h', 'a', 'r', 'd']], [['w', 'i', 'f', 'e'], ['i', 'd', 'l', 'e'], ['t', 'e', 'a', 'l'], ['h', 'a', 't', 's']], [['s', 'c', 'a', 'n'], ['h', 'a', 'r', 'e'], ['i', 'r', 'e', 's'], ['n', 'e', 'a', 't']], [['c', 'u', 'l', 'l'], ['a', 'r', 'i', 'a'], ['m', 'e', 's', 's'], ['p', 'a', 't', 'h']], [['d', 'i', 'r', 'e'], ['o', 'd', 'o', 'r'], ['t', 'e', 'a', 'r'], ['h', 'a', 'm', 's']], [['f', 'i', 'a', 't'], ['e', 'd', 'g', 'e'], ['n', 'e', 'a', 'r'], ['d', 'a', 'r', 'n']], [['w', 'a', 'n', 'e'], ['a', 'r', 'e', 'a'], ['l', 'i', 'e', 's'], ['l', 'a', 'd', 'y']], [['s', 'c', 'a', 'b'], ['c', 'o', 'n', 'e'], ['a', 'l', 'o', 'e'], ['t', 'a', 'n', 's']], [['h', 'u', 'l', 'k'], ['a', 'r', 'i', 'a'], ['r', 'e', 'e', 'l'], ['m', 'a', 'r', 'e']], [['a', 'c', 'e', 'd'], ['u', 'r', 'e', 'a'], ['r', 'o', 'l', 'l'], ['a', 'p', 's', 'e']], [['g', 'o', 'r', 'e'], ['a', 'g', 'o', 'g'], ['s', 'l', 'a', 'g'], ['h', 'e', 'r', 's']], [['w', 'i', 'n', 'g'], ['i', 'd', 'e', 'a'], ['s', 'l', 'a', 't'], ['h', 'y', 'p', 'e']], [['m', 'a', 'z', 'e'], ['u', 'r', 'e', 'a'], ['s', 'e', 'a', 's'], ['s', 'a', 'l', 'e']], [['k', 'i', 't', 's'], ['e', 'c', 'h', 'o'], ['e', 'k', 'e', 'd'], ['l', 'y', 'e', 's']], [['p', 'a', 'v', 'e'], ['u', 'r', 'e', 'a'], ['f', 'i', 'n', 's'], ['f', 'a', 't', 'e']], [['d', 'u', 'o', 's'], ['a', 'r', 'i', 'a'], ['t', 'e', 'l', 'l'], ['e', 'a', 's', 'e']], [['m', 'o', 'n', 'k'], ['u', 'p', 'o', 'n'], ['f', 'a', 'd', 'e'], ['f', 'l', 'e', 'w']], [['t', 'i', 'l', 'l'], ['i', 'd', 'e', 'a'], ['e', 'l', 'a', 'n'], ['r', 'e', 'n', 'd']], [['t', 'h', 'a', 'n'], ['r', 'i', 's', 'e'], ['a', 'r', 'k', 's'], ['p', 'e', 's', 't']], [['l', 'e', 'a', 'k'], ['a', 'c', 'm', 'e'], ['t', 'h', 'e', 'y'], ['e', 'o', 'n', 's']], [['d', 'a', 'n', 'e'], ['u', 'r', 'e', 'a'], ['l', 'e', 's', 's'], ['l', 'a', 't', 'e']], [['y', 'e', 'l', 'l'], ['a', 'l', 'o', 'e'], ['n', 'a', 'g', 's'], ['k', 'n', 'o', 't']], [['d', 'i', 'g', 's'], ['i', 'd', 'l', 'e'], ['n', 'o', 'u', 'n'], ['s', 'l', 'e', 'd']], [['w', 'a', 'r', 'd'], ['a', 'l', 'o', 'e'], ['s', 't', 'a', 'b'], ['p', 'o', 'r', 't']], [['p', 'i', 'p', 's'], ['e', 'd', 'i', 't'], ['g', 'o', 'n', 'e'], ['s', 'l', 'e', 'w']], [['c', 'h', 'a', 't'], ['h', 'a', 'v', 'e'], ['i', 'r', 'o', 'n'], ['n', 'e', 'w', 's']], [['s', 'o', 'w', 'n'], ['e', 'p', 'e', 'e'], ['r', 'a', 'r', 'e'], ['f', 'l', 'e', 'd']], [['w', 'e', 'a', 'l'], ['a', 'x', 'l', 'e'], ['s', 'p', 'i', 't'], ['h', 'o', 't', 's']], [['v', 'i', 'e', 'w'], ['i', 'd', 'e', 'a'], ['a', 'l', 'l', 'y'], ['l', 'e', 's', 's']], [['s', 'o', 'p', 's'], ['e', 'd', 'i', 't'], ['n', 'o', 't', 'e'], ['d', 'r', 'a', 'm']], [['w', 'e', 'e', 'd'], ['a', 'c', 'm', 'e'], ['s', 'h', 'i', 'n'], ['p', 'o', 'r', 't']], [['j', 'u', 'g', 's'], ['a', 'r', 'e', 'a'], ['r', 'e', 'e', 'l'], ['s', 'a', 'k', 'e']], [['c', 'u', 'e', 's'], ['a', 'r', 'e', 'a'], ['m', 'e', 'l', 't'], ['e', 'a', 's', 'e']], [['j', 'o', 'i', 'n'], ['a', 'p', 's', 'e'], ['m', 'a', 'l', 'e'], ['b', 'l', 'e', 'd']], [['h', 'e', 'f', 't'], ['a', 'c', 'r', 'e'], ['t', 'h', 'e', 'n'], ['h', 'o', 'e', 'd']], [['g', 'o', 'n', 'e'], ['a', 'v', 'i', 'd'], ['s', 'e', 'n', 'd'], ['p', 'r', 'e', 'y']], [['l', 'o', 'n', 'e'], ['a', 'r', 'e', 'a'], ['s', 'c', 'a', 'r'], ['t', 'a', 'r', 'n']], [['g', 'r', 'i', 'n'], ['r', 'u', 'd', 'e'], ['i', 's', 'l', 'e'], ['d', 'e', 'e', 'd']], [['f', 'l', 'o', 'w'], ['l', 'o', 'p', 'e'], ['a', 'c', 'e', 's'], ['p', 'i', 'n', 't']], [['c', 'u', 's', 'p'], ['a', 'r', 'i', 'a'], ['d', 'e', 'n', 't'], ['s', 'a', 's', 'h']], [['w', 'e', 'a', 'r'], ['h', 'a', 'r', 'e'], ['a', 's', 'k', 's'], ['t', 'e', 's', 't']], [['g', 'r', 'u', 'b'], ['y', 'e', 'l', 'l'], ['m', 'a', 'n', 'e'], ['s', 'l', 'a', 'w']], [['d', 'a', 'l', 'e'], ['a', 'x', 'e', 'l'], ['f', 'l', 'e', 'a'], ['t', 'e', 'r', 'n']], [['p', 'r', 'i', 'g'], ['r', 'o', 's', 'e'], ['a', 'b', 'l', 'e'], ['m', 'e', 'e', 'k']], [['r', 'o', 'a', 'd'], ['a', 'n', 't', 'e'], ['s', 't', 'o', 'w'], ['h', 'o', 'p', 's']], [['d', 'u', 'd', 'e'], ['a', 'r', 'e', 'a'], ['s', 'e', 'a', 's'], ['h', 'a', 'r', 'e']], [['h', 'u', 'r', 'l'], ['a', 'r', 'e', 'a'], ['l', 'e', 'a', 'n'], ['l', 'a', 'r', 'd']], [['s', 'a', 'l', 'e'], ['a', 'r', 'e', 'a'], ['w', 'i', 'n', 's'], ['s', 'a', 't', 'e']], [['b', 'o', 'u', 't'], ['a', 'b', 'l', 'e'], ['r', 'o', 'v', 'e'], ['b', 'e', 'a', 'm']], [['g', 'o', 'a', 'l'], ['a', 'b', 'l', 'e'], ['l', 'o', 'i', 'n'], ['l', 'e', 't', 's']], [['m', 'e', 'l', 't'], ['a', 'l', 'o', 'e'], ['r', 'a', 'r', 'e'], ['e', 'n', 'd', 's']], [['h', 'o', 'o', 'k'], ['u', 'p', 'o', 'n'], ['m', 'a', 'z', 'e'], ['s', 'l', 'e', 'w']], [['r', 'e', 'a', 'd'], ['i', 'd', 'l', 'e'], ['m', 'i', 't', 'e'], ['s', 't', 'o', 'p']], [['e', 'a', 'r', 'n'], ['g', 'l', 'u', 'e'], ['g', 'o', 'n', 'e'], ['s', 'e', 'e', 'd']], [['j', 'u', 'g', 's'], ['a', 'r', 'i', 'a'], ['m', 'e', 's', 's'], ['b', 'a', 't', 's']], [['h', 'u', 'm', 's'], ['a', 'r', 'e', 'a'], ['r', 'e', 'e', 'k'], ['p', 'a', 't', 'e']], [['h', 'u', 'r', 'l'], ['a', 'r', 'e', 'a'], ['r', 'e', 'a', 'd'], ['t', 'a', 'r', 's']], [['b', 'u', 'r', 'l'], ['a', 'r', 'e', 'a'], ['l', 'e', 'a', 'd'], ['m', 'a', 'p', 's']], [['t', 'o', 'k', 'e'], ['a', 'v', 'i', 'd'], ['r', 'e', 'n', 'd'], ['o', 'r', 'g', 'y']], [['h', 'o', 'n', 'k'], ['u', 'p', 'o', 'n'], ['g', 'a', 'p', 'e'], ['s', 'l', 'e', 'w']], [['c', 'a', 's', 'e'], ['h', 'u', 'l', 'l'], ['i', 't', 'e', 'm'], ['p', 'o', 'd', 's']], [['o', 'n', 'e', 's'], ['r', 'e', 'a', 'l'], ['b', 'a', 's', 'e'], ['s', 't', 'e', 'w']], [['r', 'o', 's', 'y'], ['a', 'b', 'l', 'e'], ['s', 'o', 'i', 'l'], ['h', 'e', 'm', 'p']], [['c', 'o', 'n', 's'], ['a', 'm', 'o', 'k'], ['t', 'i', 'd', 'e'], ['s', 't', 'e', 'w']], [['f', 'o', 'n', 't'], ['i', 'd', 'e', 'a'], ['r', 'o', 'a', 'r'], ['e', 'r', 'r', 's']], [['d', 'i', 'e', 't'], ['e', 'd', 'd', 'y'], ['l', 'e', 'e', 'r'], ['l', 'a', 'n', 'e']], [['w', 'e', 'a', 'k'], ['a', 'x', 'l', 'e'], ['r', 'i', 't', 'e'], ['s', 't', 'o', 'p']], [['i', 's', 'l', 'e'], ['n', 'o', 'o', 'n'], ['c', 'l', 'a', 'd'], ['h', 'e', 'n', 's']], [['p', 'u', 'n', 'y'], ['a', 'r', 'e', 'a'], ['r', 'e', 'a', 'm'], ['e', 'a', 't', 's']], [['d', 'i', 'g', 's'], ['a', 'b', 'l', 'e'], ['t', 'e', 'e', 'n'], ['a', 'x', 'e', 'd']], [['j', 'a', 'w', 's'], ['u', 'r', 'e', 'a'], ['r', 'e', 'a', 'p'], ['y', 'a', 'k', 's']], [['o', 'g', 'r', 'e'], ['b', 'r', 'a', 'y'], ['o', 'o', 'z', 'e'], ['e', 'w', 'e', 's']], [['s', 'h', 'i', 'm'], ['l', 'i', 'c', 'e'], ['u', 'r', 'e', 'a'], ['r', 'e', 's', 't']], [['a', 'c', 'e', 'd'], ['r', 'o', 'l', 'e'], ['c', 'a', 's', 'e'], ['s', 't', 'e', 'p']], [['b', 'a', 'b', 'y'], ['a', 'r', 'e', 'a'], ['t', 'i', 'e', 'r'], ['h', 'a', 'n', 'd']], [['c', 'o', 'i', 'l'], ['r', 'i', 's', 'e'], ['i', 'l', 'l', 's'], ['b', 'y', 'e', 's']], [['b', 'e', 'a', 'n'], ['i', 'd', 'l', 'e'], ['l', 'e', 't', 's'], ['k', 'n', 'o', 't']], [['r', 'o', 'd', 'e'], ['a', 'r', 'i', 'a'], ['i', 'c', 'e', 's'], ['l', 'a', 'd', 'y']], [['p', 'a', 'r', 't'], ['a', 'r', 'e', 'a'], ['t', 'i', 'e', 'r'], ['s', 'a', 'k', 'e']], [['t', 'i', 'l', 't'], ['o', 'b', 'o', 'e'], ['g', 'e', 'n', 'e'], ['a', 'x', 'e', 's']], [['b', 'i', 'n', 's'], ['e', 'd', 'i', 't'], ['g', 'o', 'n', 'e'], ['s', 'l', 'e', 'w']], [['c', 'h', 'o', 'w'], ['r', 'o', 'v', 'e'], ['o', 'p', 'e', 'n'], ['p', 'e', 'r', 't']], [['p', 'e', 'e', 'p'], ['a', 'c', 'm', 'e'], ['s', 'h', 'i', 'n'], ['s', 'o', 'r', 't']], [['b', 'u', 's', 'y'], ['o', 'r', 'c', 'a'], ['w', 'e', 'a', 'n'], ['s', 'a', 'n', 'k']], [['l', 'u', 'g', 'e'], ['o', 'p', 'a', 'l'], ['o', 'o', 'p', 's'], ['k', 'n', 'e', 'e']]]
-        var solution = solutions[Math.floor(Math.random()*100)];
-        var tiles = [[{},{},{},{}],[{},{},{},{}],[{},{},{},{}],[{},{},{},{}]];
-        var cells = [[{},{},{},{}],[{},{},{},{}],[{},{},{},{}],[{},{},{},{}]];
-        var activeTile = false;
-        
-        function initialize(){            
-            for(let i=0;i<4;i++){
-                for(let j=0;j<4;j++){
-                    tiles[i][j].cellX = i;
-                    tiles[i][j].cellY = j;
-                    tiles[i][j].letter = solution[i][j].toUpperCase(); 
-                    tiles[i][j].bgcolor = 'white';
-                    tiles[i][j].textcolor = 'black';
-                    tiles[i][j].cursor = 'pointer';
-                    cells[i][j].tileX = i;
-                    cells[i][j].tileY = j;
-                }
-            }
-            shuffle();
-            display();
-        }
-
-        function swap(i1,j1,i2,j2){
-            cellX1 = tiles[i1][j1].cellX;
-            cellY1 = tiles[i1][j1].cellY;
-            cellX2 = tiles[i2][j2].cellX;           
-            cellY2 = tiles[i2][j2].cellY;
-            tiles[i1][j1].cellX = cellX2;
-            tiles[i1][j1].cellY = cellY2;
-            tiles[i2][j2].cellX = cellX1;
-            tiles[i2][j2].cellY = cellY1;
-            cells[cellX1][cellY1].tileX = i2;
-            cells[cellX1][cellY1].tileY = j2;
-            cells[cellX2][cellY2].tileX = i1;
-            cells[cellX2][cellY2].tileY = j1;
-        }        
-
-        function shuffle(){
-            for(let i=0;i<4;i++){
-                for(let j=0;j<4;j++){
-                    swap(i,j,Math.floor(Math.random()*4),Math.floor(Math.random()*4));
-                }
-            }            
-        }        
-        
-        function display(){
-            for(let i=0;i<4;i++){
-                for(let j=0;j<4;j++){
-                    let element = document.getElementById(i.toString()+j.toString());
-                    element.innerHTML = tiles[cells[i][j].tileX][cells[i][j].tileY].letter;
-                    element.style.backgroundColor = tiles[cells[i][j].tileX][cells[i][j].tileY].bgcolor;
-                    element.style.color = tiles[cells[i][j].tileX][cells[i][j].tileY].textcolor;
-                    element.style.cursor = tiles[cells[i][j].tileX][cells[i][j].tileY].cursor;
-                }
-            }
-        }
-        
-        function activate(cell){
-            let i = cells[parseInt(cell.id[0],10)][parseInt(cell.id[1],10)].tileX;
-            let j = cells[parseInt(cell.id[0],10)][parseInt(cell.id[1],10)].tileY;
-            if(!isRevealed(tiles[i][j])){
-                if(activeTile){
-                    swap(i,j,activeTile[0],activeTile[1]);
-                    deactivate(cell);
-                }else{
-                    tiles[i][j].bgcolor='gray';
-                    tiles[i][j].cursor='default';
-                    activeTile=[i,j];
-                }
-            }
-        }      
-        
-        function isRevealed(tile){
-            if(tile.bgcolor=='black'){
-                return true;
-            }else{
-                return false;
-            }
-        }
-       
-        function hint(){
-            if(!check()){
-                if(activeTile){
-                    let tile = tiles[activeTile[0]][activeTile[1]];
-                    console.log(tile);
-                    let cell = document.getElementById(tile.cellX.toString()+tile.cellY.toString());
-                    console.log(cell);
-                    deactivate(cell);
-                    console.log(cell);
-                    display();
-                }
-                let i = Math.floor(Math.random()*4);
-                let j = Math.floor(Math.random()*4);
-                if(isRevealed(tiles[i][j])){
-                    hint();
-                }else{
-                    tiles[i][j].bgcolor = 'black';
-                    tiles[i][j].textcolor = 'white';
-                    tiles[i][j].cursor = 'default';
-                    swap(i,j,cells[i][j].tileX,cells[i][j].tileY);
-                }
-            }else{
-                celebrate();
-            }
-            
-        }
-        
-        function deactivate(cell){
-            let i = cells[parseInt(cell.id[0],10)][parseInt(cell.id[1],10)].tileX;
-            let j = cells[parseInt(cell.id[0],10)][parseInt(cell.id[1],10)].tileY;
-            tiles[i][j].bgcolor='white';
-            tiles[i][j].cursor='pointer';
-            activeTile=false;
-        }
-        
-        function check(){
-             for(let i=0;i<4;i++){
-                for(let j=0;j<4;j++){
-                    if(tiles[cells[i][j].tileX][cells[i][j].tileY].letter!=solution[i][j].toUpperCase()){
-                        return false;
-                    } 
-                }
-            }
-            return true;
-        }
-        
-        function celebrate(){
-            for(let i=0;i<4;i++){
-                for(let j=0;j<4;j++){
-                    if(tiles[i][j].bgcolor == 'white'){
-                        tiles[i][j].bgcolor = 'gray';
-                    }
-                    tiles[i][j].cursor = 'default';
-                }
-            }
-            display();
-        }
-        
-        initialize();       
-        
-    </script>
+    <script type="text/javascript" src="words.js"></script>
+    <script type="text/javascript" src="squares.js"></script>
+    <script type="text/javascript" src="board.js"></script>
 </html>
