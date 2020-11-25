@@ -1,0 +1,31 @@
+#board{
+    display:table; border-spacing:10px; margin-top:10%;
+}
+
+.row{
+    display:table-row;
+}
+
+.cell{
+    display:table-cell; 
+    height:64px; 
+    width:64px; 
+    border: 2px solid black; 
+    text-align:center; 
+    font-size:32px;
+    line-height:64px; 
+    border-radius:8px; 
+    cursor:pointer; 
+    user-select: none;
+}
+
+.hint{
+    height:28px; 
+    width:300px; 
+    border:2px solid black; 
+    margin-top:24px; 
+    line-height:28px; 
+    font-size:24px;  
+    cursor:pointer;  
+    user-select: none;
+}
