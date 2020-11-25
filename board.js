@@ -4,7 +4,7 @@ var numRows = 4;
 var numCols = 4;
 var cells = [];
 var tiles = [];
-var solution = solutions[Math.floor(Math.random()*solutions.length)].split(" ").join("").toUpperCase();
+var solution = solutions[Math.floor(Math.random()*solutions.length)];
 var activeIndex = -1;
 var board = document.getElementById("board");
 var hintBar = document.createElement("div");
@@ -16,10 +16,9 @@ function initialize(){
         board.appendChild(row);
         for(let j=0;j<numCols;j++){
             let cellIndex = j+i*numCols;
-            console.log(cellIndex);
             tiles.push({});
             cells.push({});
-            tiles[cellIndex].letter = solution[cellIndex];
+            tiles[cellIndex].letter = solution.split(" ").join("").toUpperCase()[cellIndex];
             tiles[cellIndex].bgcolor = "white";
             tiles[cellIndex].textcolor = "black";
             tiles[cellIndex].cursor = "pointer";
@@ -155,3 +154,6 @@ function celebrate(){
 }
 
 initialize();
+fetch("https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?usp=pp_url&entry.34160038="+solution.split(" ").join("+")+"&Submit=submit");
+
+
