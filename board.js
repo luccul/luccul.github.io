@@ -8,6 +8,7 @@ var solution = solutions[Math.floor(Math.random()*solutions.length)];
 var activeIndex = -1;
 var board = document.getElementById("board");
 var hintBar = document.createElement("div");
+var hints = 0; 
 
 function initialize(){            
     for(let i=0;i<numRows;i++){
@@ -125,6 +126,7 @@ function hint(){
     if(isRevealed(hintIndex)){
         hint();
     }else{
+        hints+=1;
         tiles[hintIndex].bgcolor = 'black';
         tiles[hintIndex].textcolor = 'white';
         tiles[hintIndex].cursor = 'default';
@@ -151,9 +153,8 @@ function celebrate(){
     hintBar.onclick = function(){};
     hintBar.style.cursor = 'default';
     setTimeout(display,5000);
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?usp=pp_url&entry.34160038="+solution.split(" ").join("+")+"&entry.1571849764="+hints.toString()+"&Submit=submit");
 }
 
 initialize();
-fetch("https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?usp=pp_url&entry.34160038="+solution.split(" ").join("+")+"&Submit=submit");
-
 
