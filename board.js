@@ -8,7 +8,6 @@ var solution = solutions[Math.floor(Math.random()*solutions.length)];
 var activeIndex = -1;
 var board = document.getElementById("board");
 var hintBar = document.createElement("div");
-var hints = 0; 
 
 function initialize(){            
     for(let i=0;i<numRows;i++){
@@ -22,6 +21,7 @@ function initialize(){
             tiles[cellIndex].letter = solution.split(" ").join("").toUpperCase()[cellIndex];
             tiles[cellIndex].bgcolor = "white";
             tiles[cellIndex].textcolor = "black";
+            tiles[cellIndex].outlinecolor = "#555";
             tiles[cellIndex].cursor = "pointer";
             tiles[cellIndex].cellIndex = cellIndex;
             tiles[cellIndex].isRevealed = false;
@@ -60,6 +60,7 @@ function display(){
         cell.element.style.transition = 'all 0s';
         cell.element.innerHTML = tile.letter;
         cell.element.style.backgroundColor = tile.bgcolor;
+        cell.element.style.border = "2px solid "+tile.outlinecolor;
         cell.element.style.color = tile.textcolor;
         cell.element.style.cursor = tile.cursor;
     })
@@ -74,7 +75,7 @@ function activate(cellIndex){
     if(!isRevealed(tileIndex)){
         console.log(tiles[tileIndex]);
         if(activeIndex==-1){
-            tiles[tileIndex].bgcolor = 'gray';
+            tiles[tileIndex].bgcolor = '#555';
             tiles[tileIndex].cursor = 'default';
             activeIndex = tileIndex;
             display();
@@ -126,9 +127,9 @@ function hint(){
     if(isRevealed(hintIndex)){
         hint();
     }else{
-        hints+=1;
         tiles[hintIndex].bgcolor = 'black';
         tiles[hintIndex].textcolor = 'white';
+        tiles[hintIndex].outlinecolor = 'black';
         tiles[hintIndex].cursor = 'default';
         tiles[hintIndex].isRevealed = true;
         swap(hintIndex,cells[hintIndex].tileIndex);
@@ -141,20 +142,25 @@ function hint(){
 
 function celebrate(){
     tiles.forEach(tile=>{
-        let cell = cells[tile.cellIndex]; 
-        tiles[cell.tileIndex].isRevealed = true;
-        tiles[cell.tileIndex].cursor = 'default';
+        let cell = cells[tile.cellIndex];
+        if(cell.tileIndex==activeIndex){
+            cell.element.style.backgroundcolor='white';
+        }
         cell.element.style.transition = 'all 5s';
-        cell.element.style.backgroundColor = 'black';
+        if(!tiles[cell.tileIndex].isRevealed){
+            cell.element.style.backgroundColor = '#555';
+        }else{
+            cell.element.style.backgroundColor = 'black';
+        }
         cell.element.style.color = 'white';
         cell.element.style.cursor = 'default';
         cell.element.onclick = function(){};
     })
     hintBar.onclick = function(){};
     hintBar.style.cursor = 'default';
-    setTimeout(display,5000);
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?usp=pp_url&entry.34160038="+solution.split(" ").join("+")+"&entry.1571849764="+hints.toString()+"&Submit=submit");
 }
 
 initialize();
+
+
 
