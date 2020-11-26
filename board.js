@@ -190,7 +190,7 @@ function celebrate(){
             scoreBar.onclick = function(){};
             scoreBar.style.cursor = 'default';
             scoreBar.style.borderColor = 'white';
-            scoreBar.innerHTML = "FINAL SCORE: "+score.toString();
+            scoreBar.innerHTML = "FINAL SCORE: "+score.toString()+"/256";
             hintBar.style.backgroundColor = 'white';
             hintBar.style.color = 'black';
             hintBar.style.borderColor = '#666'
