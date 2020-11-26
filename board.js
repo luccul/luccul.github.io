@@ -1,17 +1,23 @@
-var rows = [];
-var cols = [];
 var numRows = 4;
 var numCols = 4;
-var cells = [];
-var tiles = [];
-var solution = solutions[Math.floor(Math.random()*solutions.length)];
-var activeIndex = -1;
 var board = document.getElementById("board");
 var hintBar = document.createElement("div");
+var scoreBar = document.createElement("div");
+var cells = [];
+var tiles = [];
+var rows = [];
+var solution = "";
+var hints = 0;
+var swaps = 0;
+var score = 256;
+var activeIndex = -1;
+var celebrated = false;
 
-function initialize(){            
+function initialize(){
+    solution = solutions[Math.floor(Math.random()*solutions.length)];
     for(let i=0;i<numRows;i++){
-        let row = document.createElement("div");
+        rows.push(document.createElement("div"));
+        row = rows[i];
         row.className = "row";
         board.appendChild(row);
         for(let j=0;j<numCols;j++){
@@ -21,7 +27,7 @@ function initialize(){
             tiles[cellIndex].letter = solution.split(" ").join("").toUpperCase()[cellIndex];
             tiles[cellIndex].bgcolor = "white";
             tiles[cellIndex].textcolor = "black";
-            tiles[cellIndex].outlinecolor = "#555";
+            tiles[cellIndex].outlinecolor = "#666";
             tiles[cellIndex].cursor = "pointer";
             tiles[cellIndex].cellIndex = cellIndex;
             tiles[cellIndex].isRevealed = false;
@@ -33,10 +39,18 @@ function initialize(){
             row.appendChild(cells[cellIndex].element);
         }
     }
-    hintBar.className = "hint";
+    hintBar.className = "bar";
     hintBar.innerHTML = "HINT";
     hintBar.onclick = function(){hint();};
-    board.after(hintBar);
+    hintBar.style.backgroundColor='black';
+    hintBar.style.color = 'white';
+    hintBar.style.borderColor = 'black';
+    scoreBar.className = "bar";
+    scoreBar.innerHTML = "SCORE";
+    scoreBar.style.borderColor = '#666';
+    scoreBar.onclick = function(){if(this.innerHTML == "SCORE"){this.innerHTML = score.toString();}else{this.innerHTML = "SCORE"}};
+    board.after(scoreBar);
+    scoreBar.after(hintBar);
     shuffle();
     display();
 }
@@ -64,6 +78,10 @@ function display(){
         cell.element.style.color = tile.textcolor;
         cell.element.style.cursor = tile.cursor;
     })
+    score = 256 - 16*hints - swaps;
+    if(scoreBar.innerHTML != "SCORE"){
+        scoreBar.innerHTML = score.toString();
+    }
 }
 
 function isRevealed(tileIndex){
@@ -75,11 +93,14 @@ function activate(cellIndex){
     if(!isRevealed(tileIndex)){
         console.log(tiles[tileIndex]);
         if(activeIndex==-1){
-            tiles[tileIndex].bgcolor = '#555';
+            tiles[tileIndex].outlinecolor = '#FCC201';
             tiles[tileIndex].cursor = 'default';
             activeIndex = tileIndex;
             display();
         }else{
+            if(tileIndex != activeIndex){
+                swaps += 1;
+            }
             swap(tileIndex,activeIndex);
             deactivate();            
             display();
@@ -91,7 +112,7 @@ function activate(cellIndex){
 }
 
 function deactivate(){
-    tiles[activeIndex].bgcolor='white';
+    tiles[activeIndex].outlinecolor='#666';
     tiles[activeIndex].cursor='pointer';
     activeIndex = -1;
 }
@@ -133,6 +154,7 @@ function hint(){
         tiles[hintIndex].cursor = 'default';
         tiles[hintIndex].isRevealed = true;
         swap(hintIndex,cells[hintIndex].tileIndex);
+        hints += 1;
         display();
     }
     if(finished()){
@@ -141,26 +163,58 @@ function hint(){
 }
 
 function celebrate(){
-    tiles.forEach(tile=>{
-        let cell = cells[tile.cellIndex];
-        if(cell.tileIndex==activeIndex){
-            cell.element.style.backgroundcolor='white';
-        }
-        cell.element.style.transition = 'all 5s';
-        if(!tiles[cell.tileIndex].isRevealed){
-            cell.element.style.backgroundColor = '#555';
-        }else{
-            cell.element.style.backgroundColor = 'black';
-        }
-        cell.element.style.color = 'white';
-        cell.element.style.cursor = 'default';
-        cell.element.onclick = function(){};
-    })
-    hintBar.onclick = function(){};
-    hintBar.style.cursor = 'default';
+    if(!celebrated){
+        celebrated = true;
+        display();
+        hintBar.onclick = function(){};
+        hintBar.style.cursor = 'default';
+        tiles.forEach(tile=>{
+            let cell = cells[tile.cellIndex];
+            if(cell.tileIndex==activeIndex){
+                cell.element.style.backgroundcolor='white';
+            }
+            if(!tiles[cell.tileIndex].isRevealed){
+                cell.element.style.border ='2px solid #FFF';
+                cell.element.style.transition = 'all 3s';
+                cell.element.style.backgroundColor = '#FCC201';
+                cell.element.style.border = '2px solid #FCC201';
+                cell.element.style.color = 'black';
+            }else{
+                cell.element.style.backgroundColor = 'black';
+                cell.element.style.color = 'white';
+            }
+            cell.element.style.cursor = 'default';
+            cell.element.onclick = function(){};
+        })
+        setTimeout(function(){
+            scoreBar.onclick = function(){};
+            scoreBar.style.cursor = 'default';
+            scoreBar.style.borderColor = 'white';
+            scoreBar.innerHTML = "FINAL SCORE: "+score.toString();
+            hintBar.style.backgroundColor = 'white';
+            hintBar.style.color = 'black';
+            hintBar.style.borderColor = '#666'
+            hintBar.innerHTML = "PLAY AGAIN"
+            hintBar.onclick = function(){again();}
+            hintBar.style.cursor = 'pointer';
+        },3000);
+    }
+    
+}
+
+function again(){
+    cells.forEach(cell=>cell.element.remove());
+    cells = [];
+    tiles = [];
+    rows.forEach(row=>row.remove());
+    rows = [];
+    solution = "";
+    hints = 0;
+    swaps = 0;
+    score = 0;
+    activeIndex = -1;
+    celebrated = false;
+    initialize();
 }
 
 initialize();
-
-
-
