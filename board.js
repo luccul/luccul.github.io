@@ -9,7 +9,7 @@ var rows = [];
 var solution = "";
 var hints = 0;
 var swaps = 0;
-var score = 256;
+var score = 0;
 var activeIndex = -1;
 var celebrated = false;
 
@@ -78,7 +78,7 @@ function display(){
         cell.element.style.color = tile.textcolor;
         cell.element.style.cursor = tile.cursor;
     })
-    score = 256 - 16*hints - swaps;
+    score = 16*hints + swaps;
     if(scoreBar.innerHTML != "SCORE"){
         scoreBar.innerHTML = score.toString();
     }
