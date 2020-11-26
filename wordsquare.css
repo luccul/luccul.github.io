@@ -1,5 +1,8 @@
 #board{
-    display:table; border-spacing:10px; margin-top:10%;
+    display:table; 
+    border-spacing:10px; 
+    margin-top:10%;
+    font-family: Roboto, sans-serif;
 }
 
 .row{
@@ -20,12 +23,15 @@
 }
 
 .hint{
-    height:28px; 
+    height:32px; 
     width:300px; 
-    border:2px solid black; 
+    border:2px solid #555;
+    border-radius: 4px;
     margin-top:24px; 
     line-height:32px; 
+    overflow: center;
     font-size:24px;  
+    font-family: Roboto, sans-serif;
     cursor:pointer;  
     user-select: none;
 }
