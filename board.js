@@ -1,7 +1,8 @@
 var numRows = 4;
 var numCols = 4;
-var board = document.getElementById("board");
+var board = document.getElementById("board"); 
 var hintBar = document.createElement("div");
+var dictionaryBar = document.createElement("div");
 var cells = [];
 var tiles = [];
 var rows = [];
@@ -43,7 +44,14 @@ function initialize(){
     hintBar.style.backgroundColor='white';
     hintBar.style.color = 'black';
     hintBar.style.borderColor = '#666';
+    dictionaryBar.className = "bar";
+    dictionaryBar.innerHTML = "WORDS";
+    dictionaryBar.onclick = function(){showDictionary();};
+    dictionaryBar.style.backgroundColor='white';
+    dictionaryBar.style.color = 'black';
+    dictionaryBar.style.borderColor = '#666';
     board.after(hintBar);
+    hintBar.after(dictionaryBar);
     shuffle();
     display();
 }
@@ -179,7 +187,7 @@ function celebrate(){
             hintBar.innerHTML = "PLAY AGAIN"
             hintBar.onclick = function(){again();}
             hintBar.style.cursor = 'pointer';
-        },3000);
+        },2000);
     }
     
 }
@@ -196,6 +204,20 @@ function again(){
     activeIndex = -1;
     celebrated = false;
     initialize();
+}
+
+function showDictionary(){
+    dictionaryContainer = document.createElement("div");
+    dictionaryContainer.className = 'dictionary-container';
+    document.body.appendChild(dictionaryContainer);
+    dictionaryScreen = document.createElement("div");
+    dictionaryScreen.className = 'dictionary-screen';
+    dictionaryScreen.innerHTML = wordList.join('<br>');
+    dictionaryContainer.append(dictionaryScreen);
+    dictionaryScreen.onclick = function(){
+        dictionaryContainer.remove();
+        dictionaryScreen.remove();
+    }
 }
 
 initialize();
