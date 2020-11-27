@@ -2,14 +2,12 @@ var numRows = 4;
 var numCols = 4;
 var board = document.getElementById("board");
 var hintBar = document.createElement("div");
-var scoreBar = document.createElement("div");
 var cells = [];
 var tiles = [];
 var rows = [];
 var solution = "";
 var hints = 0;
 var swaps = 0;
-var score = 0;
 var activeIndex = -1;
 var celebrated = false;
 
@@ -42,15 +40,10 @@ function initialize(){
     hintBar.className = "bar";
     hintBar.innerHTML = "HINT";
     hintBar.onclick = function(){hint();};
-    hintBar.style.backgroundColor='black';
-    hintBar.style.color = 'white';
-    hintBar.style.borderColor = 'black';
-    scoreBar.className = "bar";
-    scoreBar.innerHTML = "SCORE";
-    scoreBar.style.borderColor = '#666';
-    scoreBar.onclick = function(){if(this.innerHTML == "SCORE"){this.innerHTML = score.toString();}else{this.innerHTML = "SCORE"}};
-    board.after(scoreBar);
-    scoreBar.after(hintBar);
+    hintBar.style.backgroundColor='white';
+    hintBar.style.color = 'black';
+    hintBar.style.borderColor = '#666';
+    board.after(hintBar);
     shuffle();
     display();
 }
@@ -77,11 +70,7 @@ function display(){
         cell.element.style.border = "2px solid "+tile.outlinecolor;
         cell.element.style.color = tile.textcolor;
         cell.element.style.cursor = tile.cursor;
-    })
-    score = 16*hints + swaps;
-    if(scoreBar.innerHTML != "SCORE"){
-        scoreBar.innerHTML = score.toString();
-    }
+    });
 }
 
 function isRevealed(tileIndex){
@@ -187,13 +176,6 @@ function celebrate(){
             cell.element.onclick = function(){};
         })
         setTimeout(function(){
-            scoreBar.onclick = function(){};
-            scoreBar.style.cursor = 'default';
-            scoreBar.style.borderColor = 'white';
-            scoreBar.innerHTML = "FINAL SCORE: "+score.toString();
-            hintBar.style.backgroundColor = 'white';
-            hintBar.style.color = 'black';
-            hintBar.style.borderColor = '#666'
             hintBar.innerHTML = "PLAY AGAIN"
             hintBar.onclick = function(){again();}
             hintBar.style.cursor = 'pointer';
@@ -211,7 +193,6 @@ function again(){
     solution = "";
     hints = 0;
     swaps = 0;
-    score = 0;
     activeIndex = -1;
     celebrated = false;
     initialize();
