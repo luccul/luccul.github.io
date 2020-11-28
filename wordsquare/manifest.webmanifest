@@ -1,0 +1,9 @@
+{
+  "name": "WordSquare",
+  "short_name": "WordSquare",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A surprisingly tricky puzzle: rearrange the letters so that every row and column is a word",
+  "icons": []
+}
