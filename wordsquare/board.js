@@ -150,14 +150,20 @@ function hint(){
     if(isRevealed(hintIndex)){
         hint();
     }else{
-        tiles[hintIndex].bgcolor = 'black';
-        tiles[hintIndex].textcolor = 'white';
-        tiles[hintIndex].outlinecolor = 'black';
-        tiles[hintIndex].cursor = 'default';
-        tiles[hintIndex].isRevealed = true;
-        swap(hintIndex,cells[hintIndex].tileIndex);
-        hints += 1;
-        display();
+        cells[tiles[hintIndex].cellIndex].element.click();
+        setTimeout(function(){
+            setTimeout(function(){
+                cells[hintIndex].element.click();
+                tiles[hintIndex].bgcolor = 'black';
+                tiles[hintIndex].textcolor = 'white';
+                tiles[hintIndex].outlinecolor = 'black';
+                tiles[hintIndex].cursor = 'default';
+                tiles[hintIndex].isRevealed = true;
+                swap(hintIndex,cells[hintIndex].tileIndex);
+                hints += 1;
+                display();
+            },250);
+        },250);
     }
     if(finished()){
         celebrate();
