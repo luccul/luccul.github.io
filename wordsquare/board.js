@@ -9,6 +9,10 @@ var rows = [];
 var solution = "";
 var hints = 0;
 var swaps = 0;
+var elapsed = 0;
+var startTime = 0;
+var endTime = 0;
+var statState = 0;
 var activeIndex = -1;
 var celebrated = false;
 
@@ -163,17 +167,6 @@ function hint(){
 function celebrate(){
     if(!celebrated){
         endTime = Date.now();
-        elapsed = endTime-startTime;
-        seconds = (Math.floor(elapsed/1000)).toString();
-        timeString = seconds+' SECONDS';
-        if(seconds>120){
-            minutes = (Math.floor(elapsed/60000)).toString();
-            timeString = minutes+' MINUTES';
-            if(minutes>120){
-                hours = (Math.floor(elapsed/3600000)).toString();
-                timeString = hours+' HOURS';
-            }
-        }
         celebrated = true;
         display();
         hintBar.onclick = function(){};
@@ -204,10 +197,11 @@ function celebrate(){
         })
         setTimeout(function(){
             hintBar.style.opacity = 1;
-            dictionaryBar.style.opacity = 1;           
-            hintBar.innerHTML = timeString;
+            dictionaryBar.style.opacity = 1;
+            hintBar.innerHTML = "STATISTICS";
+            hintBar.onclick = function(){toggleStats();};
             dictionaryBar.innerHTML = "PLAY AGAIN";
-            dictionaryBar.onclick = function(){again();}
+            dictionaryBar.onclick = function(){again();};
             dictionaryBar.style.cursor = 'pointer';
         },1500);
     }
@@ -226,6 +220,28 @@ function again(){
     activeIndex = -1;
     celebrated = false;
     initialize();
+}
+
+function toggleStats(){
+    if(statState==0){
+        elapsed = endTime-startTime;
+        seconds = (Math.floor(elapsed/1000)).toString();
+        timeString = seconds+' SECONDS';
+        if(seconds>120){
+            minutes = (Math.floor(elapsed/60000)).toString();
+            timeString = minutes+' MINUTES';
+            if(minutes>120){
+                hours = (Math.floor(elapsed/3600000)).toString();
+                timeString = hours+' HOURS';
+            }
+        }
+        hintBar.innerHTML = timeString;
+    }else if(statState==1){
+        hintBar.innerHTML = swaps+' SWAPS';
+    }else{
+        hintBar.innerHTML = 'STATISTICS'
+    }
+    statState = (statState + 1)%3
 }
 
 function showDictionary(){
