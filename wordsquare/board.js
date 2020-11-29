@@ -54,6 +54,7 @@ function initialize(){
     hintBar.after(dictionaryBar);
     shuffle();
     display();
+    startTime = Date.now();
 }
 
 function swap(tileIndex1,tileIndex2){
@@ -161,10 +162,28 @@ function hint(){
 
 function celebrate(){
     if(!celebrated){
+        endTime = Date.now();
+        elapsed = endTime-startTime;
+        seconds = (Math.floor(elapsed/1000)).toString();
+        timeString = seconds+' SECONDS';
+        if(seconds>120){
+            minutes = (Math.floor(elapsed/60000)).toString();
+            timeString = minutes+' MINUTES';
+            if(minutes>120){
+                hours = (Math.floor(elapsed/3600000)).toString();
+                timeString = hours+' HOURS';
+            }
+        }
         celebrated = true;
         display();
         hintBar.onclick = function(){};
         hintBar.style.cursor = 'default';
+        hintBar.style.transition = 'all 1.5s';
+        dictionaryBar.onclick = function(){};
+        dictionaryBar.style.cursor = 'default';
+        dictionaryBar.style.transition = 'all 1.5s';
+        hintBar.style.opacity = 0;
+        dictionaryBar.style.opacity = 0;
         tiles.forEach(tile=>{
             let cell = cells[tile.cellIndex];
             if(cell.tileIndex==activeIndex){
@@ -184,10 +203,13 @@ function celebrate(){
             cell.element.onclick = function(){};
         })
         setTimeout(function(){
-            hintBar.innerHTML = "PLAY AGAIN"
-            hintBar.onclick = function(){again();}
-            hintBar.style.cursor = 'pointer';
-        },2000);
+            hintBar.style.opacity = 1;
+            dictionaryBar.style.opacity = 1;           
+            hintBar.innerHTML = timeString;
+            dictionaryBar.innerHTML = "PLAY AGAIN";
+            dictionaryBar.onclick = function(){again();}
+            dictionaryBar.style.cursor = 'pointer';
+        },1500);
     }
     
 }
@@ -218,15 +240,6 @@ function showDictionary(){
         dictionaryContainer.remove();
         dictionaryScreen.remove();
     }
-}
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker
-      .register("serviceWorker.js")
-      .then(res => console.log("service worker registered"))
-      .catch(err => console.log("service worker not registered", err))
-  })
 }
 
 initialize();
