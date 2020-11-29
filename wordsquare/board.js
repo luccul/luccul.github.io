@@ -252,10 +252,23 @@ function showDictionary(){
     dictionaryScreen.className = 'dictionary-screen';
     dictionaryScreen.innerHTML = wordList.join('<br>');
     dictionaryContainer.append(dictionaryScreen);
-    dictionaryScreen.onclick = function(){
+    dictionaryCloser = document.createElement("div");
+    dictionaryCloser.className = "dictionary-closer";
+    dictionaryCloser.innerHTML = "X";
+    dictionaryScreen.after(dictionaryCloser);
+    dictionaryCloser.onclick = function(){
         dictionaryContainer.remove();
         dictionaryScreen.remove();
     }
 }
 
 initialize();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker
+      .register("serviceWorker.js")
+      .then(res => console.log("service worker registered"))
+      .catch(err => console.log("service worker not registered", err))
+  })
+}
