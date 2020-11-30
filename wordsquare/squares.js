@@ -116,7 +116,7 @@ var solutions = ['over nave uses sent',
                   'slur tone acts riot',
                   'ohms pain ursa step',
                   'once poor ends neat',
-                  'show cope omen tent'
+                  'show cope omen tent',
                   'ends boat beta slab',
                   'star pile iron need',
                   'arcs leap saga omen',
