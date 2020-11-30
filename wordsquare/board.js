@@ -206,6 +206,7 @@ function celebrate(){
             dictionaryBar.style.opacity = 1;
             hintBar.innerHTML = "STATISTICS";
             hintBar.onclick = function(){toggleStats();};
+            hintBar.style.cursor = 'pointer';
             dictionaryBar.innerHTML = "PLAY AGAIN";
             dictionaryBar.onclick = function(){again();};
             dictionaryBar.style.cursor = 'pointer';
