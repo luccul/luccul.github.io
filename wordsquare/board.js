@@ -150,19 +150,19 @@ function hint(){
     if(isRevealed(hintIndex)){
         hint();
     }else{
-        cells[tiles[hintIndex].cellIndex].element.click();
+        tiles[hintIndex].outlinecolor = '#FCC201';
+        display();
+        tiles[hintIndex].outlinecolor = '#666';
         setTimeout(function(){
-            setTimeout(function(){
-                cells[hintIndex].element.click();
-                tiles[hintIndex].bgcolor = 'black';
-                tiles[hintIndex].textcolor = 'white';
-                tiles[hintIndex].outlinecolor = 'black';
-                tiles[hintIndex].cursor = 'default';
-                tiles[hintIndex].isRevealed = true;
-                swap(hintIndex,cells[hintIndex].tileIndex);
-                hints += 1;
-                display();
-            },250);
+            swap(hintIndex,cells[hintIndex].tileIndex);
+            tiles[hintIndex].bgcolor = 'black';
+            tiles[hintIndex].textcolor = 'white';
+            tiles[hintIndex].outlinecolor = 'black';
+            tiles[hintIndex].cursor = 'default';
+            tiles[hintIndex].isRevealed = true;
+            swap(hintIndex,cells[hintIndex].tileIndex);
+            hints += 1;
+            display();
         },250);
     }
     if(finished()){
