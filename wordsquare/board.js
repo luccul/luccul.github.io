@@ -150,20 +150,14 @@ function hint(){
     if(isRevealed(hintIndex)){
         hint();
     }else{
-        tiles[hintIndex].outlinecolor = '#FCC201';
+        tiles[hintIndex].bgcolor = 'black';
+        tiles[hintIndex].textcolor = 'white';
+        tiles[hintIndex].outlinecolor = 'black';
+        tiles[hintIndex].cursor = 'default';
+        tiles[hintIndex].isRevealed = true;
+        swap(hintIndex,cells[hintIndex].tileIndex);
+        hints += 1;
         display();
-        tiles[hintIndex].outlinecolor = '#666';
-        setTimeout(function(){
-            swap(hintIndex,cells[hintIndex].tileIndex);
-            tiles[hintIndex].bgcolor = 'black';
-            tiles[hintIndex].textcolor = 'white';
-            tiles[hintIndex].outlinecolor = 'black';
-            tiles[hintIndex].cursor = 'default';
-            tiles[hintIndex].isRevealed = true;
-            swap(hintIndex,cells[hintIndex].tileIndex);
-            hints += 1;
-            display();
-        },250);
     }
     if(finished()){
         celebrate();
@@ -233,7 +227,11 @@ function toggleStats(){
     if(statState==0){
         elapsed = endTime-startTime;
         seconds = (Math.floor(elapsed/1000)).toString();
-        timeString = seconds+' SECONDS';
+        if(seconds == 1){
+            timeString = '1 SECOND';
+        }else{
+            timeString = seconds+' SECONDS';            
+        }
         if(seconds>120){
             minutes = (Math.floor(elapsed/60000)).toString();
             timeString = minutes+' MINUTES';
@@ -244,7 +242,11 @@ function toggleStats(){
         }
         hintBar.innerHTML = timeString;
     }else if(statState==1){
-        hintBar.innerHTML = swaps+' SWAPS';
+        if(swaps==1){
+            hintBar.innerHTML = '1 SWAP';
+        }else{
+            hintBar.innerHTML = swaps+' SWAPS';            
+        }
     }else{
         hintBar.innerHTML = 'STATISTICS'
     }
