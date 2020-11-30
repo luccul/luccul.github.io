@@ -3900,6 +3900,5 @@ var wordList = ['aahs',
 'zoon',
 'zoos',
 'zori',
-'zyme']
-
+'zyme'];
 var dictionary = new Set(wordList);
