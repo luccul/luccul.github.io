@@ -167,6 +167,7 @@ function hint(){
 function celebrate(){
     if(!celebrated){
         endTime = Date.now();
+        elapsed = endTime-startTime;
         celebrated = true;
         display();
         hintBar.onclick = function(){};
@@ -206,7 +207,7 @@ function celebrate(){
             dictionaryBar.style.cursor = 'pointer';
         },1500);
         try{
-                        fetch('https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?entry.34160038='+solution+'&entry.1571849764='+hints+'&entry.1236799835='+(Math.floor(elapsed/1000)).toString()+'&entry.843405783='+swaps);
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLScuAhejd5Ynj2T9WYhl_Y90UotsZ22Sl4jDRaQ5I1tuPibkrg/formResponse?entry.34160038='+solution+'&entry.1571849764='+hints+'&entry.1236799835='+(elapsed/1000).toString()+'&entry.843405783='+swaps);
         }finally{
         }
     }
