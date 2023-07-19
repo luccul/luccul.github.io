@@ -1,12 +1,12 @@
 var hours = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 var minutes = ['35', '40', '45', '50', '55', '00', '05', '10', '15', '20', '25', '30'];
-var hourIndex = 2;
-var minuteIndex = 8;
+var hourIndex = 3;
+var minuteIndex = 9;
 var clock = document.getElementById("clock");
-var leftPerm = [11,10,5,7,8,2,9,3,4,6,1,0];
-var rightPerm = [11,10,5,7,8,2,9,3,4,6,1,0];
-var upPerm = [10,5,7,8,2,9,3,4,6,1,11,0];
-var downPerm = [11,9,4,6,7,1,8,2,3,5,0,10];
+var leftPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
+var rightPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
+var upPerm = [4,5,6,7,8,9,10,11,0,1,2,3];
+var downPerm = [8,9,10,11,0,1,2,3,4,5,6,7];
 var perms = [leftPerm,rightPerm,upPerm,downPerm];
 
 function display() {
