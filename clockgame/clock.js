@@ -1,7 +1,7 @@
 var hours = [ '12','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 var minutes = ['30','35', '40', '45', '50', '55', '00', '05', '10', '15', '20', '25'];
 var hourIndex = 11;
-var minuteIndex = 6;
+var minuteIndex = 5;
 var clock = document.getElementById("clock");
 var leftPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
 var rightPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
