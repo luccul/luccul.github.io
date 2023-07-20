@@ -1,13 +1,12 @@
 var hours = [ '12','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 var minutes = ['30','35', '40', '45', '50', '55', '00', '05', '10', '15', '20', '25'];
-var hourIndex = 11;
-var minuteIndex = 5;
+var hourIndex = 8;
+var minuteIndex = 4;
 var clock = document.getElementById("clock");
-var leftPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
-var rightPerm = [6,4,10,5,1,3,0,9,11,7,2,8];
-var upPerm = [4,5,6,7,8,9,10,11,0,1,2,3];
-var downPerm = [8,9,10,11,0,1,2,3,4,5,6,7];
-var perms = [leftPerm,rightPerm,upPerm,downPerm];
+var leftPerm = [0,2,3,4,5,6,7,8,9,10,11,1];
+var rightPerm = [0,11,1,2,3,4,5,6,7,8,9,10];
+var upPerm = [11,10,5,7,8,2,9,3,4,6,1,0];
+var downPerm = [11,10,5,7,8,2,9,3,4,6,1,0];
 
 function display() {
     clock.innerHTML = 'Press the arrow keys to change the time. <br> Can you set the clock to midnight? <br><br><br>'+hours[hourIndex] + ':' + minutes[minuteIndex] + '<br>';
@@ -23,12 +22,12 @@ document.addEventListener('keyup',(e) =>{
         minuteIndex = downPerm[minuteIndex];
     }
     else if (e.keyCode == '37') {
-        hourIndex = leftPerm[hourIndex];
-        minuteIndex = leftPerm[minuteIndex];
+        hourIndex = upPerm[leftPerm[hourIndex]];
+        minuteIndex = upPerm[leftPerm[minuteIndex]];
     }
     else if (e.keyCode == '39') {
-        hourIndex = rightPerm[hourIndex];
-        minuteIndex = rightPerm[minuteIndex];
+        hourIndex = rightPerm[downPerm[hourIndex]];
+        minuteIndex = rightPerm[downPerm[minuteIndex]];
     }
     display();
 })
