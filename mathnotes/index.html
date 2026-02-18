@@ -14,28 +14,19 @@
       ]
     });"></script>
 </head>
-<body>
+<body style="max-width:900px">
 
-<h1> Math Notes</h1>
+<h1> Multivariable Calculus</h1>
+
+<h2> Introduction </h2>
+
+In calculus, you studied functions of one variable, such as
 
 <div>
-  $$ \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} $$
+  $$f(x) = x^2$$
 </div>
 
-<div>
-$$\begin{tikzpicture}
-\draw[->] (-3.5,0)--(3.5,0);
-\node at (4,0){$x$};
-\draw[->] (0,-1)--(0,4);
-\node at (0,4.5){$y$};
-\draw[scale = 1, domain=-2:2, smooth, variable = \x] plot ({\x},{\x*\x});
-\fill[ gray, domain=0.5:1.5, smooth, variable = \x] (0.5,0)--(0.5,0.25)--plot ({\x},{\x*\x})--(1.5,2.25)--(1.5,0)--(0.5,0);
-\node at (0.5,-0.3) {$a$};
-\node at (1.5,-0.3) {$b$}; 
-\node at (3,1){Area $\displaystyle= \int_a^b f(x)dx$};
-\end{tikzpicture}
-$$ 
-</div>
+
 
 
 </body>
